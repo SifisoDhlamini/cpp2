@@ -32,6 +32,11 @@ class Node {
     return this->data;
   }
 
+  void setData()
+  {
+      this->data = data;
+  }
+
   /**
    * Construct a new Node object with parameters
    * @param data: data to put in
