@@ -303,41 +303,105 @@ private:
     Node<T> *tail;
 };
 
-int main(){
-    // Node<int> *node = new Node<int>(5);
-    // cout<<node->getData()<<endl;
-    LinkedList<int> *l1 = new LinkedList<int>(5);
-    cout<<l1;
+template <class T>
+class Stack
+{
+public:
+    /**
+     * Construct a new Stack object with no parameter
+     */
+    Stack() {
+        this->list = new LinkedList<T>();
+    }
 
-    l1->addToHead(8);
-    l1->addToTail(9);
-    cout<<l1;
+    /**
+     * Add a data to stack
+     * @param data: data to be added to stack
+     */
+    void push(T data) {
+        this->list->addToTail(data);
+    }
 
-    //Node<int> *node = new Node<int>(7, l1->getNode(5), l1->getNode(9));
-    l1->addBetween(7, 5, 9);
-    cout << l1;
-    l1->deleteData(5);
-    cout<<l1;
+    /**
+     * Remove a data from stack and return it
+     * @return the data removed from stack
+     */
+    T pop() {
+        if (isEmpty())
+            return 0;
+        T data = this->list->getTail()->getData();
+        this->list->deleteData(data);
+        return data;
+    }
 
-    l1->deleteData(7, 4);
-    cout<<l1;
+    /**
+     * @return the last element in the stack
+     */
+    T top() {
+        if (isEmpty())
+            return NULL;
+        return this->list->getTail()->getData();
+    }
 
-    cout << "*********************************\n";
-    LinkedList<int> *l2 = new LinkedList<int>();
-    cout << l2;
+    /**
+     * @return true if stack is empty, false otherwise
+     */
+    bool isEmpty() {
+        return this->list->getHead() == nullptr;
+    }
 
-    l2->addToHead(8);
-    l2->addToTail(9);
-    cout << l2;
+    /**
+     * @return the size of the stack
+     */
+    int size() {
+        //count nodes in linked list
+        int count = 0;
+        Node<T> *node = this->list->getHead();
+        while (node != nullptr)
+        {
+            count++;
+            node = node->getNext();
+        }
+        return count;
+    }
 
-    // Node<int> *node = new Node<int>(7, l1->getNode(5), l1->getNode(9));
-    l2->addBetween(7, 5, 9);
-    cout << l2;
-    l2->deleteData(5);
-    cout << l2;
+    //inherit << operator from LinkedList
+    friend std::ostream &operator<<(std::ostream &out, Stack *n)
+    {
+        out << n->list;
+        return out;
+    }
 
-    l2->deleteData(8, 4);
-    cout << l2;
+private:
+    LinkedList<T> *list;
+};
 
+int main()
+{
+    //create stack
+    Stack<int> *stack = new Stack<int>();
+    //push 1, 2, 3, 4, 5 to stack
+    stack->push(1);
+    stack->push(2);
+    stack->push(3);
+    stack->push(4);
+    stack->push(5);
+    //print stack
+    cout << stack << endl;
+    //pop 2 elements from stack
+    stack->pop();
+    stack->pop();
+    //print stack
+    cout << stack << endl;
+    //remove remaining elements
+    //get size of stack
+    cout<<"The size of the stack is "<<stack->size()<<endl;    
+    while (!stack->isEmpty())
+    {
+        stack->pop();
+    }
+    //print stack
+    cout << stack << endl;
+    cout<<"The stack is "<<(stack->isEmpty()?"empty":"not empty")<<endl;
     return 0;
 }

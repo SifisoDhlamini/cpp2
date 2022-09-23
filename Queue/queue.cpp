@@ -193,7 +193,7 @@ public:
             {
                 if (node == head)
                 {
-                    if(node->getNext() == nullptr)
+                    if (node->getNext() == nullptr)
                     {
                         head = nullptr;
                         tail = nullptr;
@@ -206,7 +206,7 @@ public:
                 }
                 else if (node == tail)
                 {
-                    if(node->getPrev() == nullptr)
+                    if (node->getPrev() == nullptr)
                     {
                         head = nullptr;
                         tail = nullptr;
@@ -313,7 +313,8 @@ public:
     /**
      * Construct a new Queue object with no parameter
      */
-    Queue() {
+    Queue()
+    {
         this->list = new LinkedList<T>();
     }
 
@@ -321,7 +322,8 @@ public:
      * Add a data to queue
      * @param data: data to be added to queue
      */
-    void enqueue(T data) {
+    void enqueue(T data)
+    {
         this->list->addToTail(data);
     }
 
@@ -329,7 +331,8 @@ public:
      * Remove a data from queue and return it if it is not empty
      * @return the data removed from queue
      */
-    T dequeue() {
+    T dequeue()
+    {
         if (isEmpty())
             return 0;
         T data = this->list->getHead()->getData();
@@ -340,21 +343,22 @@ public:
      * @return the first element in the queue if not empty
      * @return NULL if queue is empty
      */
-    T front() {
+    T front()
+    {
         if (isEmpty())
-           return NULL;
+            return NULL;
         return this->list->getHead()->getData();
-        
     }
 
     /**
      * @return true if queue is empty, false otherwise
      */
-    bool isEmpty() {
+    bool isEmpty()
+    {
         return this->list->getHead() == nullptr;
     }
 
-    //inherit LinkedList << operator to print queue
+    //inherit << operator from LinkedList
     friend std::ostream &operator<<(std::ostream &out, Queue *n)
     {
         out << n->list;
@@ -365,7 +369,6 @@ public:
 private:
     LinkedList<T> *list;
 };
-
 
 int main(){
     //create a queue
