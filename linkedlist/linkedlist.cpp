@@ -13,13 +13,24 @@ class Node {
   /**
    * Construct a new Node object with no parameter
    */
-  Node() {}
+  Node() {
+    *prev  = NULL;
+    *next = NULL;
+    //data{};
+  }
 
   /**
    * Construct a new Node object with parameter
    * @param data: data to put in
    */
-  Node(T data) {}
+  Node(T data) {
+    this->data = data;
+  }
+
+
+  T getData(){
+    return this->data;
+  }
 
   /**
    * Construct a new Node object with parameters
@@ -45,7 +56,9 @@ class LinkedList {
   /**
    * Construct a new LinkedList object with no parameter
    */
-  LinkedList() {}
+  LinkedList() {
+
+  }
 
   /**
    * Add a node to the tail of the linked list
@@ -88,3 +101,14 @@ class LinkedList {
     Node<T> *head;
     Node<T> *tail;
 };
+
+
+int main(){
+
+    LinkedList<int> *L1 = new LinkedList<int>();
+    // Node<int> *node = new Node<int>(5);
+    // cout<<node->getData()<<endl;
+
+
+    return 0;
+}
